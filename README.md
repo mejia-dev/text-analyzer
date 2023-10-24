@@ -88,3 +88,10 @@ const text = "";
 const word = "";
 boldPassage(word, text);
 Expected Output: null
+
+Test: "It should return a non-matching word in a p tag."
+Code:
+const word = "hello";
+const text = "yo";
+boldPassage(word, text);
+Expected Output: <p>yo</p>
