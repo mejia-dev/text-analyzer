@@ -16,12 +16,13 @@ Test: "It should return 0 for a string that is only spaces."
 Code: wordCounter("            ");
 Expected Output: 0
 
-Test: "It should not accept zoinks, muppeteer, biffaroni, and loopdaloop"
+Test: "It should not increase word count if any of the following words are used: zoinks, muppeteer, biffaroni, and loopdaloop"
 Code:
 if text = "zoinks"
 if text = "muppeteer"
 if text = "biffaroni"
 if text = "loopdaloop"
+wordCounter(text);
 Expected Output: 0
 
 
@@ -70,3 +71,9 @@ const word = "Red";
 numberOfOccurrencesInText(word, text);
 Expected Output: 3
 
+Test: "If an empty string is passed in as a word, it should return 0."
+Code:
+const word = "";
+const text = "red RED Red!";
+numberOfOccurrencesInText(word, text);
+Expected Output: 0
