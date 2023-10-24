@@ -46,7 +46,13 @@ function boldPassage(word, text) {
     return null;
   }
   const p = document.createElement("p");
-  p.append(text);
+  if (word === text) {
+    const bold = document.createElement("strong");
+    bold.append(text);
+    p.append(bold);
+  } else {
+    p.append(text);
+  }
   return p;
 }
 
