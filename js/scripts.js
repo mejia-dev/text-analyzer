@@ -2,7 +2,7 @@
 let offensiveWords = ["zoinks", "muppeteer", "biffaroni", "loopdaloop"];
 
 function wordCounter(text) {
-  if (text.trim().length === 0) {
+  if (isEmpty(text)) {
     return 0;
   }
   let wordCount = 0;
@@ -17,7 +17,7 @@ function wordCounter(text) {
 
 
 function numberOfOccurrencesInText(word, text) {
-  if (word.trim().length === 0) {
+  if (isEmpty(word)) {
     return 0;
   }
   const textArray = text.split(" ");
@@ -30,19 +30,8 @@ function numberOfOccurrencesInText(word, text) {
   return wordCount;
 }
 
-//UI Logic
-function handleFormSubmission() {
-  event.preventDefault();
-  const passage = document.getElementById("text-passage").value;
-  const word = document.getElementById("word").value;
-  const wordCount = wordCounter(passage);
-  const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
-  document.getElementById("total-count").innerText = wordCount;
-  document.getElementById("selected-count").innerText = occurrencesOfWord;
-}
-
 function boldPassage(word, text) {
-  if ((text.trim().length === 0) || (word.trim().length === 0)) {
+  if (isEmpty(word) || isEmpty(text)) {
     return null;
   }
   const p = document.createElement("p");
@@ -60,6 +49,23 @@ function boldPassage(word, text) {
     }
   });
   return p;
+}
+
+// Utility Logic
+
+function isEmpty(testString) {
+  return (testString.trim().length === 0);
+}
+
+//UI Logic
+function handleFormSubmission() {
+  event.preventDefault();
+  const passage = document.getElementById("text-passage").value;
+  const word = document.getElementById("word").value;
+  const wordCount = wordCounter(passage);
+  const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
+  document.getElementById("total-count").innerText = wordCount;
+  document.getElementById("selected-count").innerText = occurrencesOfWord;
 }
 
 window.addEventListener("load", function() {
