@@ -41,6 +41,12 @@ function handleFormSubmission() {
   document.getElementById("selected-count").innerText = occurrencesOfWord;
 }
 
+function boldPassage(word, text) {
+  if ((text.trim().length === 0) || (word.trim().length === 0)) {
+    return null;
+  }
+}
+
 window.addEventListener("load", function() {
   document.querySelector("form#word-counter").addEventListener("submit", handleFormSubmission);
 });
