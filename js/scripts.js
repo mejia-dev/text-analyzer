@@ -57,6 +57,25 @@ function isEmpty(testString) {
   return (testString.trim().length === 0);
 }
 
+let wordMap = new Map();
+
+function assignValuesToMap(passage) {
+  let passageArray = passage.split(" ");
+  passageArray.forEach(function(word) {
+    // for each word in the array
+      // if a key exists in wordMap matching the word
+        // add +1 to the value of the key
+      // if a key does not exist in wordMap matching the word
+        // create the key
+        // add +1 to the value of the key
+        if (wordMap.has(word)) {
+          wordMap.set(word, wordMap.get(word) + 1)
+        } else {
+          wordMap.set(word,1);
+        }
+  })
+}
+
 //UI Logic
 function handleFormSubmission() {
   event.preventDefault();
@@ -64,6 +83,7 @@ function handleFormSubmission() {
   const word = document.getElementById("word").value;
   const wordCount = wordCounter(passage);
   const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
+
   document.getElementById("total-count").innerText = wordCount;
   document.getElementById("selected-count").innerText = occurrencesOfWord;
   let boldedPassage = boldPassage(word, passage);
