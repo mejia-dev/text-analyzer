@@ -15,7 +15,6 @@ function wordCounter(text) {
   return wordCount;
 }
 
-
 function numberOfOccurrencesInText(word, text) {
   if (isEmpty(word)) {
     return 0;
@@ -51,24 +50,21 @@ function boldPassage(word, text) {
   return p;
 }
 
+function addKeysAndValuesToUl(array) {
+  const ul = document.createElement("ul");
+  Object.keys(array).forEach(function (key) {
+    let li = document.createElement("li");
+    li.append(`${key}` + ":" + `${array[key].numberOfTimes}`);
+    ul.append(li);
+  });
+  return ul;
+}
+
 // Utility Logic
 
 function isEmpty(testString) {
   return (testString.trim().length === 0);
 }
-
-// function assignValuesToMap(passage) {
-//   let wordMap = new Map();
-//   let passageArray = passage.split(" ");
-//   passageArray.forEach(function (word) {
-//     if (wordMap.has(word)) {
-//       wordMap.set(word, wordMap.get(word) + 1)
-//     } else {
-//       wordMap.set(word, 1);
-//     }
-//   })
-//   return wordMap;
-// }
 
 function assignValuesToWordArray(passage) {
   let wordArray = [];
@@ -77,26 +73,10 @@ function assignValuesToWordArray(passage) {
     if (wordArray.hasOwnProperty(word)) {
       wordArray[word].numberOfTimes += 1;
     } else {
-      wordArray[word] = {numberOfTimes: 1}
+      wordArray[word] = { numberOfTimes: 1 }
     }
   })
   return wordArray;
-}
-
-function getKeysAndValues(array) {
-  Object.keys(array).forEach(function (key) {
-    console.log(`Word: ${key}, Number of Times: ${wordArray[key].numberOfTimes}`);
-  });
-}
-
-function displayValuesFromWordArray(wordArray) {
-  const ul = document.createElement("ul");
-  wordArray.forEach(function (word) {
-    let li = document.createElement("li");
-    li.append(word.key + ":" + word);
-    ul.append(li);
-  })
-  return ul;
 }
 
 //UI Logic
@@ -106,9 +86,11 @@ function handleFormSubmission() {
   const word = document.getElementById("word").value;
   const wordCount = wordCounter(passage);
   const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
-  const numberOfWords = assignValuesToWordArray(passage);
+  const wordKeyValuePairs = assignValuesToWordArray(passage);
+  const numberOfWordsUl = addKeysAndValuesToUl(wordKeyValuePairs);
   document.getElementById("total-count").innerText = wordCount;
   document.getElementById("selected-count").innerText = occurrencesOfWord;
+  document.getElementById("wordCount-passage").append(numberOfWordsUl);
   let boldedPassage = boldPassage(word, passage);
   if (boldedPassage) {
     document.querySelector("div#bolded-passage").append(boldedPassage);
