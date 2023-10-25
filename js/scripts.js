@@ -60,6 +60,17 @@ function addKeysAndValuesToUl(array) {
   return ul;
 }
 
+function firstInstanceOfWord(word,text) {
+  const textArray = text.split(" ");
+  for (let i = 0; i < textArray.length; i++) {
+    console.log(i);
+    if (word === textArray[i]) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 // Utility Logic
 
 function isEmpty(testString) {
@@ -79,6 +90,14 @@ function assignValuesToWordArray(passage) {
   return wordArray;
 }
 
+function sortKeysAndValues(kvpair) {
+  Object.keys(kvpair)
+    .sort()
+    .forEach(function(v, i) {
+      console.log(v, kvpair[v]);
+    })
+}
+
 //UI Logic
 function handleFormSubmission() {
   event.preventDefault();
@@ -88,6 +107,7 @@ function handleFormSubmission() {
   const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
   const wordKeyValuePairs = assignValuesToWordArray(passage);
   const numberOfWordsUl = addKeysAndValuesToUl(wordKeyValuePairs);
+  // const alphabetized = numberOfWordsUl.sort((a,b) => a[1].name.localeCompare(b[1].name));
   document.getElementById("total-count").innerText = wordCount;
   document.getElementById("selected-count").innerText = occurrencesOfWord;
   document.getElementById("wordCount-passage").append(numberOfWordsUl);
